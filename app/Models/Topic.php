@@ -6,12 +6,16 @@ class Topic extends Model
 {
     protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
-    public function category(){
+    public function category(){//一个话题属于一个分类
         return $this->belongsTo(Category::class);
     }
 
-    public function user(){
+    public function user(){//一个话题属于一个用户
         return $this->belongsTo(User::class);
+    }
+
+    public function replies(){//一个话题有多个回复
+        return $this->hasMany(Reply::class);
     }
 
     public function scopeWithOrder($query, $order)
